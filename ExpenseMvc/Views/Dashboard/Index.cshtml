@@ -1,0 +1,280 @@
+﻿@model IEnumerable<ExpenseMvc.Models.mvcDashboard>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    <meta charset="utf-8">
+    <title>Dashboard | Exapnce Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+    <link href="~/assets/libs/chartist/chartist.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Css -->
+    <link href="~/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <!-- Icons Css -->
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <!-- App Css-->
+    <link href="~/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+
+
+</head>
+<body data-sidebar="dark">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+            <div data-simplebar class="h-100">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title">Main</li>
+                        <li>
+                            <a href="@Url.Action("Index","Dashboard")">
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Category</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="@Url.Action("AddOrEdit","Category")">Add Category</a></li>
+                                <li><a href="@Url.Action("Index","Category")">View Category</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Expense</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="@Url.Action("AddOrEdit","Expense")">Add Expense</a></li>
+                                <li><a href="@Url.Action("Index","Expense")">View Expense</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+
+                                <span>Total</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="@Url.Action("AddOrEdit","Total")">Add Total</a></li>
+                                <li><a href="@Url.Action("Index","Total")">View Total</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="page-title-box">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="page-title">Dashboard</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <div class="container">
+                        <main role="main" class="pb-3">
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card mini-stat bg-primary text-white">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <div class="stats-info">
+                                                    <h5 class="card-title">
+                                                        @foreach (var totexp in ViewBag.totalexpenses)
+                                                        {
+                                                            @totexp.totEx
+                                                        }<span class="stats-change stats-change-success"></span>
+                                                    </h5>
+                                                    <div>
+                                                        <h6><i class="ti-money"></i>Total Expense Limit</h6>
+                                                        <h5></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card mini-stat bg-primary text-white">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <h5>@ViewBag.kj</h5>
+                                                <h6>Total Expense Amount</h6>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+                            <!--Category-->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Category</h4>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-dark mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Category Id</th>
+                                                            <th>Cateory Name</th>
+                                                            <th>Category limit</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var cat in ViewBag.categories)
+                                                        {
+                                                            <tr class="table-primary">
+                                                                <td>@cat.catId</td>
+                                                                <td>@cat.catName </td>
+                                                                <td>@cat.catExlimit</td>
+                                                                <td>
+                                                                    <button type="button"><i class="fas fa-eye"></i></button>
+                                                                    <a href="@Url.Action("AddOrEdit","Category", new{ id = cat.catId})" class="btn btn-edit material-icons"><i class="fas fa-pencil-alt"></i></a>
+                                                                    @*<a onclick="Delete(@cat.catId)" class="btn btn-delete material-icons"><i class="fas fa-trash-alt"></i></a>*@
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Expense-->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Expense</h4>
+                                            <div class="table-responsive">
+                                                <table class="table table-dark mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Name</th>
+                                                            <th>Description</th>
+                                                            <th>Category</th>
+                                                            <th>Amount</th>
+                                                            <th>Category Id</th>
+                                                            <th>Date/Time</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var exp in ViewBag.expenses)
+                                                        {
+                                                            <tr class="table-primary">
+                                                                <td>@exp.exId</td>
+                                                                <td>@exp.exName</td>
+                                                                <td>@exp.exDec</td>
+                                                                <td>@exp.exCat</td>
+                                                                <td>@exp.exAmount</td>
+                                                                <td>@exp.catId</td>
+                                                                <td>@exp.exDateTime</td>
+                                                                <td>
+                                                                    <a href="@Url.Action("AddOrEdit","Expense", new{ id = exp.exId})" class="btn btn-edit material-icons"><i class="fas fa-pencil-alt"></i></a>
+                                                                    @*<a onclick="Delete1(@exp.exId)" class="btn btn-delete material-icons"><i class="fas fa-trash-alt"></i></a>*@
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+                        </main>
+                    </div>
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            ©
+                            <script>document.write(new Date().getFullYear())</script><span class="d-none d-sm-inline-block"><i class="mdi mdi-heart text-danger"></i> Ankit Ranpara</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- JAVASCRIPT -->
+    <script src="~/assets/libs/jquery/jquery.min.js"></script>
+    <script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/assets/libs/node-waves/waves.min.js"></script>
+    <!-- Peity chart-->
+    <script src="~/assets/libs/peity/jquery.peity.min.js"></script>
+    <!-- Plugin Js-->
+    <script src="~/assets/libs/chartist/chartist.min.js"></script>
+    <script src="~/assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+    <script src="~/assets/js/pages/dashboard.init.js"></script>
+    <script src="~/assets/js/app.js"></script>
+</body>
+</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != ''){
+                alertify.success(successMessage);
+            }
+            });
+        function Delete(id) {
+            alertify.confirm('Category Delete Opration', 'Are You Sure To Delete This Category ? ', function () {
+                window.location.href = '@Url.Action("Delete","Category")/' + id;
+            }, null);
+        }
+
+         function Delete1(id) {
+            alertify.confirm('Expense Delete Opration', 'Are You Sure To Delete This Expense ? ', function () {
+                window.location.href = '@Url.Action("Delete","Expense")/' + id;
+            }, null);
+        }
+    </script>
+}

@@ -1,0 +1,165 @@
+﻿@model ExpenseMvc.Models.mvcExpense
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+
+@*<div class="form-body">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(Model => Model.exId)
+        }
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.exName)
+            @Html.EditorFor(Model => Model.exName)
+            @Html.ValidationMessageFor(Model => Model.exName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.exDec)
+            @Html.EditorFor(Model => Model.exDec)
+            @Html.ValidationMessageFor(Model => Model.exDec)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.exDateTime)
+            @Html.EditorFor(Model => Model.exDateTime)
+            @Html.ValidationMessageFor(Model => Model.exDateTime)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.exCat)
+            @Html.EditorFor(Model => Model.exCat)
+            @Html.ValidationMessageFor(Model => Model.exCat)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.exAmount)
+            @Html.EditorFor(Model => Model.exAmount)
+            @Html.ValidationMessageFor(Model => Model.exAmount)
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button" />
+            <input type="reset" value="Reset" class="btn button" />
+        </div>
+    </div>
+*@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">                                                                                   
+                                    @using (Html.BeginForm())
+                                    {
+                                        <div class="mb-3">
+                                            @Html.HiddenFor(model => model.exId)
+                                            <label for="ExpenseTitle" class="col-sm-2 col-form-label">Expense Title</label>
+                                            <div class="col-sm-10">
+                                                @Html.EditorFor(model => model.exName, new
+                                           {
+                                               htmlAttributes = new
+                                               {
+                                                   @class = "form-control",
+                                                   @name = "exptitle",
+                                                   @placeholder = "Enter Expense Title"
+                                               }
+                                           })
+                                                <span asp-validation-for="exName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="ExpenseDescription" class="col-sm-2 col-form-label">Expanse Description</label>
+                                            <div class="col-sm-10">
+                                                @Html.EditorFor(model => model.exDec, new
+                                           {
+                                               htmlAttributes = new
+                                               {
+                                                   @class = "form-control",
+                                                   @name = "exDec",
+                                                   @placeholder = "Enter Expense Description"
+                                               }
+                                           })
+                                                <span asp-validation-for="exDec" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exCat" class="col-sm-2 col-form-label">Expense Categroy</label>
+                                            <div class="col-sm-10">
+                                                @Html.DropDownListFor(model => model.exCat, new SelectList(ViewBag.data, "catName", "catName"), "Select your Category", new { @class = "form-control" })
+                                                <span asp-validation-for="exCat" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="exAmount" class="col-sm-2 col-form-label">Expense Amount </label>
+                                            <div class="col-sm-10">
+
+                                                @Html.EditorFor(model => model.exAmount, new
+                                                {
+                                                     htmlAttributes = new
+                                                    {
+                                                         @class = "form-control",
+                                                         @min = "1",
+                                                         @oninput = "validity.valid||(value='');",
+                                                         @name = "exAmount",
+                                                         @placeholder = "Enter Expense Amount"
+                                                    }
+                                                })
+                                                <span asp-validation-for="exAmount" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="catId" class="col-sm-2 col-form-label">Category Id </label>
+                                            <div class="col-sm-10">
+                                                @Html.EditorFor(model => model.catId, new
+                                                {
+                                                    htmlAttributes = new
+                                                    {
+                                                        @class = "form-control",
+                                                        @min = "1",
+                                                        @oninput = "validity.valid||(value='');",
+                                                        @name = "catId",
+                                                        @placeholder = "Enter Category Id"
+                                                    }
+                                                })
+                                                <span asp-validation-for="catId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exDateTime" class="col-sm-2 col-form-label">Expense Datetime</label>
+                                            <div class="col-sm-10">
+                                                @Html.EditorFor(model => model.exDateTime, new
+                                                {
+                                             htmlAttributes = new
+                                                    {
+                                                    @class = "form-control",
+                                                    @name = "exDateTime",
+                                                    @placeholder = "Enter Expense Date Time"
+                                                    }
+                                            })
+                                                <span asp-validation-for="exDateTime" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-0">
+                                            <div>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                                    Submit
+                                                </button>
+                                                <button type="reset" class="btn btn-secondary waves-effect">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                   
+
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div>
+        </div>
+    </div>
+</div>
+    
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
